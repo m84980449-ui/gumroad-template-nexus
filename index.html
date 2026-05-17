@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Premium — Premium Single-Page SaaS Boilerplate</title>
+  <!-- Google Fonts & Chart.js -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #030712;
+      --panel: rgba(17, 24, 39, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --accent2: #a855f7;
+      --accent2-glow: rgba(168, 85, 247, 0.15);
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --success: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, var(--accent-glow) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, var(--accent2-glow) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 6rem 0 4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Interactive Dashboard Demo */
+    .dashboard-preview {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-top: 4rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+
+    .dash-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .metric-card:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+    }
+
+    .metric-change {
+      font-size: 0.75rem;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Chart Box */
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 6rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">NEXUS</div>
+    <div class="badge">Premium Template v1.0</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Launch your SaaS<br>in <span>Record Time.</span></h1>
+      <p class="subtitle">A premium, glassmorphic dashboard template optimized for high conversions and lightning performance.</p>
+      <button class="btn" onclick="triggerAlert()">Get Started Now</button>
+    </section>
+
+    <!-- Interactive Dashboard Mockup -->
+    <section class="dashboard-preview">
+      <div class="dashboard-header">
+        <div class="dash-title">📊 Analytics Workspace</div>
+        <div class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2); color: var(--success);">Live Stream</div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Total Revenue</div>
+          <div class="metric-value" id="val-rev">$45,231.89</div>
+          <div class="metric-change">▲ +12.4% this month</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Active Users</div>
+          <div class="metric-value" id="val-users">12,492</div>
+          <div class="metric-change">▲ +8.1% vs yesterday</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Conversion Rate</div>
+          <div class="metric-value">3.42%</div>
+          <div class="metric-change">▲ +0.9% target</div>
+        </div>
+      </div>
+
+      <!-- Chart.js Live Visualization -->
+      <div class="chart-container">
+        <canvas id="liveChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Nexus Template. Designed for creators, sold under MIT license.</p>
+  </footer>
+</div>
+
+<script>
+  function triggerAlert() {
+    alert("Welcome to your new SaaS Boilerplate! Edit index.html to customize this action.");
+  }
+
+  // Interactive Live Chart Initialization
+  const ctx = document.getElementById('liveChart').getContext('2d');
+  const liveChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      datasets: [{
+        label: 'Monthly Growth (USD)',
+        data: [12000, 19000, 15000, 25000, 22000, 30000, 45231],
+        borderColor: '#3b82f6',
+        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#9ca3af' } },
+        y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#9ca3af' } }
+      }
+    }
+  });
+
+  // Dynamic values simulator to keep the dashboard feeling alive
+  setInterval(() => {
+    // Dynamic Revenue
+    const revEl = document.getElementById('val-rev');
+    const curRev = parseFloat(revEl.innerText.replace('$', '').replace(',', ''));
+    const nextRev = (curRev + Math.random() * 20).toFixed(2);
+    revEl.innerText = '$' + parseFloat(nextRev).toLocaleString(undefined, { minimumFractionDigits: 2 });
+
+    // Dynamic Users
+    const usersEl = document.getElementById('val-users');
+    const curUsers = parseInt(usersEl.innerText.replace(',', ''));
+    const nextUsers = curUsers + Math.floor(Math.random() * 3);
+    usersEl.innerText = nextUsers.toLocaleString();
+  }, 4000);
+</script>
+</body>
+</html>
